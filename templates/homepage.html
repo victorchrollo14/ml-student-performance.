@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Side Navigation Bar</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home-style.css') }}"
+    />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="wrapper">
+      <nav class="sidebar">
+        <ul>
+          <li>
+            <a
+              href="/home/janardhan/Downloads/StudentData (all 3)/3.Data/index.html"
+              ><i class="bx bxs-data"></i>Student Data</a
+            >
+          </li>
+          <li>
+            <a
+              href="/home/janardhan/Downloads/StudentData (all 3)/4.Marks/index.html"
+              ><i class="bx bxs-bookmarks"></i>Marks</a
+            >
+          </li>
+          <li>
+            <a href="/predictor"><i class="bx bxs-analyse"></i>Analyser</a>
+          </li>
+          <li>
+            <button class="btn"><i class="bx bx-log-out"></i>LOGOUT</button>
+          </li>
+        </ul>
+      </nav>
+      <div class="main_content">
+        <div class="header">
+          <center><h1>Welcome to Student DataBase</h1></center>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function login() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        // Default credentials
+        const defaultUsername = "admin";
+        const defaultPassword = "admin123";
+
+        if (username === defaultUsername && password === defaultPassword) {
+          // Redirect to home page
+          window.location.href = "home.html";
+        } else {
+          // Display error message
+          document.getElementById("error-message").textContent =
+            "Wrong username or password!";
+        }
+      }
+    </script>
+  </body>
+</html>
+

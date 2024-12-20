@@ -14,9 +14,8 @@
 <body>
     <div class="container animate__animated animate__fadeIn">
         <h1>Student Exam Performance Indicator</h1>
-        <h2>Made by Emon Hasan</h2>
 
-        <h5>To get started, please enter your demographic information</h5>
+        <h5 style="color: red; margin-bottom: 10px;">To get started, please enter your demographic information</h5>
 
         <form action="{{ url_for('predict_datapoint') }}" method="post">
             <div class="row">
@@ -97,7 +96,7 @@
         {% if results %}
         <!-- Placeholder for the result card -->
         <div class="card animate__animated animate__slideInUp mt-5">
-            <div class="card-body">
+            <div class="card-body" style="color: black;">
                 Prediction Result: <span id="prediction-result">{{ results }}</span>
             </div>
         </div>
@@ -111,9 +110,6 @@
         {% endif %}
     </div>
 
-    <footer>
-        &copy; 2024 Designed by <a href="https://github.com/Md-Emon-Hasan" target="_blank">Md Emon Hasan</a>. All Rights Reserved.
-    </footer>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

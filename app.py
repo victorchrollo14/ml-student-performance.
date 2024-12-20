@@ -14,6 +14,16 @@ def home_page():
     return render_template("homepage.html")
 
 
+@app.route("/marks", methods=["GET"])
+def marks_page():
+    return render_template("marks.html")
+
+
+@app.route("/studentData", methods=["GET"])
+def studentData_page():
+    return render_template("studentData.html")
+
+
 @app.route("/predictor", methods=["GET", "POST"])
 def predict_datapoint():
 

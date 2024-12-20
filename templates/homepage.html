@@ -14,35 +14,53 @@
   </head>
   <body>
     <div class="wrapper">
-      <nav class="sidebar">
+      <nav>
+        <div class="logo">
+          <h2>Student Portal</h2>
+        </div>
         <ul>
           <li>
-            <a
-              href="/home/janardhan/Downloads/StudentData (all 3)/3.Data/index.html"
-              ><i class="bx bxs-data"></i>Student Data</a
+            <a href="/studentData"
+              ><i class="bx bxs-data"></i><span>Student Data</span></a
             >
           </li>
           <li>
-            <a
-              href="/home/janardhan/Downloads/StudentData (all 3)/4.Marks/index.html"
-              ><i class="bx bxs-bookmarks"></i>Marks</a
+            <a href="/marks"
+              ><i class="bx bxs-bookmarks"></i><span>Marks</span></a
             >
           </li>
           <li>
-            <a href="/predictor"><i class="bx bxs-analyse"></i>Analyser</a>
-          </li>
-          <li>
-            <button class="btn"><i class="bx bx-log-out"></i>LOGOUT</button>
+            <a href="/predictor"
+              ><i class="bx bxs-analyse"></i><span>Analyser</span></a
+            >
           </li>
         </ul>
+        <button class="btn-logout">
+          <i class="bx bx-log-out"></i>
+          <span>Logout</span>
+        </button>
       </nav>
+
       <div class="main_content">
         <div class="header">
-          <center><h1>Welcome to Student DataBase</h1></center>
+          <h1>Welcome to Student Database</h1>
+        </div>
+        <div class="dashboard-cards">
+          <div class="card">
+            <h3>Total Students</h3>
+            <p>500 Students</p>
+          </div>
+          <div class="card">
+            <h3>Average Performance</h3>
+            <p>85%</p>
+          </div>
+          <div class="card">
+            <h3>Recent Updates</h3>
+            <p>Last updated: Today</p>
+          </div>
         </div>
       </div>
     </div>
-
     <script>
       function login() {
         const username = document.getElementById("username").value;
@@ -64,4 +82,3 @@
     </script>
   </body>
 </html>
-

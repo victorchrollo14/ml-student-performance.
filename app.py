@@ -24,6 +24,11 @@ def studentData_page():
     return render_template("studentData.html")
 
 
+@app.route("/marksComparison", methods=["GET"])
+def compare_page():
+    return render_template("compare.html")
+
+
 @app.route("/predictor", methods=["GET", "POST"])
 def predict_datapoint():
 

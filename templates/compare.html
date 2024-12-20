@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Marks Comparison</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/comparison.css') }}"
+    />
+    <script src="{{ url_for('static', filename='css/compare.js') }}"></script>
+  </head>
+
+  <body>
+    <div class="mx-30">
+      <h1>Student Marks Comparison</h1>
+
+      <div class="filter-container">
+        <div class="filter-item">
+          <div>Comparing batches 2020 and 2021</div>
+        </div>
+        <div class="filter-item">
+          <label for="department-select">Department</label>
+          <select id="department-select">
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electronics and Communication">
+              Electronics and Communication
+            </option>
+          </select>
+        </div>
+        <button id="select-button">Select</button>
+      </div>
+
+      <div class="tables-wrapper">
+        <div class="table-container">
+          <h2>Seniors</h2>
+          <table id="seniors-table">
+            <thead>
+              <tr>
+                <th>USN</th>
+                <th>Name</th>
+                <th>Internal 1</th>
+                <th>Internal 2</th>
+                <th>Internal 3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Senior marks data will be inserted here via JavaScript -->
+            </tbody>
+          </table>
+          <div class="average-container" id="seniors-average"></div>
+        </div>
+
+        <div class="table-container">
+          <h2>Juniors</h2>
+          <table id="juniors-table">
+            <thead>
+              <tr>
+                <th>USN</th>
+                <th>Name</th>
+                <th>Internal 1</th>
+                <th>Internal 2</th>
+                <th>Internal 3</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Junior marks data will be inserted here via JavaScript -->
+            </tbody>
+          </table>
+          <div class="average-container" id="juniors-average"></div>
+        </div>
+      </div>
+
+      <!-- New Average Calculator Section -->
+      <div class="average-calculator">
+        <h2>Average Marks Calculator</h2>
+        <div class="calculator-inputs">
+          <div class="calculator-item">
+            <label for="internal1-input">Internal 1</label>
+            <input type="number" id="internal1-input" min="0" max="100" />
+          </div>
+          <div class="calculator-item">
+            <label for="internal2-input">Internal 2</label>
+            <input type="number" id="internal2-input" min="0" max="100" />
+          </div>
+          <div class="calculator-item">
+            <label for="internal3-input">Internal 3</label>
+            <input type="number" id="internal3-input" min="0" max="100" />
+          </div>
+          <button id="calculate-average-btn">Calculate Average</button>
+        </div>
+        <div id="average-result" class="average-result">
+          <!-- Average result will be displayed here -->
+        </div>
+      </div>
+    </div>
+    <script>
+      const data = {
+        2020: {
+          "Computer Science": [
+            {
+              name: "Aarav Patel",
+              usn: "CS001",
+              internal1: 45,
+              internal2: 42,
+              internal3: 44,
+            },
+            {
+              name: "Priya Sharma",
+              usn: "CS002",
+              internal1: 43,
+              internal2: 46,
+              internal3: 41,
+            },
+            {
+              name: "Rohan Gupta",
+              usn: "CS003",
+              internal1: 40,
+              internal2: 39,
+              internal3: 45,
+            },
+            {
+              name: "Neha Reddy",
+              usn: "CS004",
+              internal1: 47,
+              internal2: 43,
+              internal3: 40,
+            },
+            {
+              name: "Siddharth Malhotra",
+              usn: "CS005",
+              internal1: 42,
+              internal2: 45,
+              internal3: 43,
+            },
+            {
+              name: "Aisha Khan",
+              usn: "CS006",
+              internal1: 44,
+              internal2: 41,
+              internal3: 46,
+            },
+            {
+              name: "Vikram Singh",
+              usn: "CS007",
+              internal1: 39,
+              internal2: 44,
+              internal3: 42,
+            },
+            {
+              name: "Divya Nair",
+              usn: "CS008",
+              internal1: 46,
+              internal2: 40,
+              internal3: 39,
+            },
+            {
+              name: "Arjun Mehta",
+              usn: "CS009",
+              internal1: 41,
+              internal2: 47,
+              internal3: 44,
+            },
+            {
+              name: "Shruti Desai",
+              usn: "CS010",
+              internal1: 43,
+              internal2: 38,
+              internal3: 45,
+            },
+          ],
+          "Electronics and Communication": [
+            {
+              name: "Rahul Krishnan",
+              usn: "EC001",
+              internal1: 42,
+              internal2: 38,
+              internal3: 45,
+            },
+            {
+              name: "Anjali Menon",
+              usn: "EC002",
+              internal1: 45,
+              internal2: 41,
+              internal3: 43,
+            },
+            {
+              name: "Karthik Raman",
+              usn: "EC003",
+              internal1: 39,
+              internal2: 44,
+              internal3: 40,
+            },
+            {
+              name: "Meera Pillai",
+              usn: "EC004",
+              internal1: 43,
+              internal2: 37,
+              internal3: 42,
+            },
+            {
+              name: "Vishal Nambiar",
+              usn: "EC005",
+              internal1: 41,
+              internal2: 45,
+              internal3: 39,
+            },
+            {
+              name: "Kavya Gopinath",
+              usn: "EC006",
+              internal1: 44,
+              internal2: 40,
+              internal3: 44,
+            },
+            {
+              name: "Abhinav Kumar",
+              usn: "EC007",
+              internal1: 37,
+              internal2: 42,
+              internal3: 41,
+            },
+            {
+              name: "Deepa Sankar",
+              usn: "EC008",
+              internal1: 40,
+              internal2: 39,
+              internal3: 46,
+            },
+            {
+              name: "Rajesh Narayanan",
+              usn: "EC009",
+              internal1: 46,
+              internal2: 43,
+              internal3: 38,
+            },
+            {
+              name: "Swathi Lakshmi",
+              usn: "EC010",
+              internal1: 38,
+              internal2: 45,
+              internal3: 42,
+            },
+          ],
+        },
+        2021: {
+          "Computer Science": [
+            {
+              name: "Aryan Sharma",
+              usn: "CS101",
+              internal1: 38,
+              internal2: 41,
+              internal3: 39,
+            },
+            {
+              name: "Ritika Patel",
+              usn: "CS102",
+              internal1: 42,
+              internal2: 37,
+              internal3: 44,
+            },
+            {
+              name: "Vivek Mishra",
+              usn: "CS103",
+              internal1: 40,
+              internal2: 43,
+              internal3: 41,
+            },
+            {
+              name: "Shreya Iyer",
+              usn: "CS104",
+              internal1: 45,
+              internal2: 39,
+              internal3: 42,
+            },
+            {
+              name: "Karan Desai",
+              usn: "CS105",
+              internal1: 37,
+              internal2: 45,
+              internal3: 40,
+            },
+            {
+              name: "Nisha Reddy",
+              usn: "CS106",
+              internal1: 43,
+              internal2: 42,
+              internal3: 38,
+            },
+            {
+              name: "Roshan Kumar",
+              usn: "CS107",
+              internal1: 41,
+              internal2: 40,
+              internal3: 45,
+            },
+            {
+              name: "Anjali Singh",
+              usn: "CS108",
+              internal1: 39,
+              internal2: 44,
+              internal3: 37,
+            },
+            {
+              name: "Mihir Joshi",
+              usn: "CS109",
+              internal1: 44,
+              internal2: 38,
+              internal3: 43,
+            },
+            {
+              name: "Zara Khan",
+              usn: "CS110",
+              internal1: 42,
+              internal2: 41,
+              internal3: 39,
+            },
+          ],
+          "Electronics and Communication": [
+            {
+              name: "Aditya Verma",
+              usn: "EC101",
+              internal1: 40,
+              internal2: 43,
+              internal3: 39,
+            },
+            {
+              name: "Priyanka Nair",
+              usn: "EC102",
+              internal1: 42,
+              internal2: 38,
+              internal3: 45,
+            },
+            {
+              name: "Rohit Malhotra",
+              usn: "EC103",
+              internal1: 37,
+              internal2: 41,
+              internal3: 42,
+            },
+            {
+              name: "Divya Menon",
+              usn: "EC104",
+              internal1: 44,
+              internal2: 39,
+              internal3: 40,
+            },
+            {
+              name: "Sanjay Pillai",
+              usn: "EC105",
+              internal1: 41,
+              internal2: 45,
+              internal3: 38,
+            },
+            {
+              name: "Lakshmi Krishnan",
+              usn: "EC106",
+              internal1: 39,
+              internal2: 42,
+              internal3: 44,
+            },
+            {
+              name: "Vikram Raman",
+              usn: "EC107",
+              internal1: 45,
+              internal2: 40,
+              internal3: 37,
+            },
+            {
+              name: "Neha Bose",
+              usn: "EC108",
+              internal1: 38,
+              internal2: 44,
+              internal3: 41,
+            },
+            {
+              name: "Kartik Subramaniam",
+              usn: "EC109",
+              internal1: 43,
+              internal2: 37,
+              internal3: 45,
+            },
+            {
+              name: "Meera Gopalan",
+              usn: "EC110",
+              internal1: 42,
+              internal2: 41,
+              internal3: 39,
+            },
+          ],
+        },
+      };
+
+      document
+        .getElementById("select-button")
+        .addEventListener("click", function () {
+          // const batch = document.getElementById("batch-select").value;
+          const department = document.getElementById("department-select").value;
+
+          // Fetch data based on the selected batch and department
+          const seniorData = data["2020"][department];
+          const juniorData = data["2021"][department];
+
+          // Render the seniors and juniors tables
+          renderTable("seniors-table", seniorData);
+          renderTable("juniors-table", juniorData);
+
+          // Render the averages
+          renderAverage("seniors-average", seniorData);
+          renderAverage("juniors-average", juniorData);
+        });
+
+      // Render table function
+      function renderTable(tableId, data) {
+        const tableBody = document
+          .getElementById(tableId)
+          .getElementsByTagName("tbody")[0];
+        tableBody.innerHTML = ""; // Clear any existing rows
+
+        data.forEach((student) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+      <td>${student.usn}</td>
+      <td>${student.name}</td>
+      <td>${student.internal1}</td>
+      <td>${student.internal2}</td>
+      <td>${student.internal3}</td>
+    `;
+          tableBody.appendChild(row);
+        });
+      }
+
+      // Render average function
+      function renderAverage(averageId, data) {
+        const totalMarks = data.reduce((acc, student) => {
+          return (
+            acc + student.internal1 + student.internal2 + student.internal3
+          );
+        }, 0);
+
+        const averageMarks = (totalMarks / (data.length * 3)).toFixed(2); // Average over all internal marks
+        document.getElementById(averageId).innerText =
+          `Average Marks: ${averageMarks}`;
+      }
+    </script>
+  </body>
+</html>
+
